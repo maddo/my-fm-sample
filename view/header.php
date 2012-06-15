@@ -20,7 +20,7 @@
 				<div class="nav-collapse">
 					<ul class="nav">
 						<?php if ($data['userData']['authorized']): ?>
-						<li>Welcome <?php echo $data['userData']['username']; ?></li>
+						<li class="greeting-nav">Welcome <?php echo $data['userData']['username']; ?></li>
 						<li><a href="/user/deauthorize">Logout</a></li>
 						<?php else: ?>
 						<li><a href="/user/login">Login</a></li>
@@ -34,10 +34,10 @@
 	<div class="container">
 		<?php if (isset($data['flash']['bucket']) && count($data['flash']['bucket']) > 0): ?>
 		<div>
-			<ul>
+			<ul class="unstyled">
 				<?php foreach ($data['flash']['bucket'] as $msg): ?>
 				<li>
-					<?php echo $msg; ?>
+					<span class="alert alert-error"><?php echo $msg; ?></span>
 				</li>
 				<?php endforeach; ?>
 			</ul>
