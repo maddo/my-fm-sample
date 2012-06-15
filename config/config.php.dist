@@ -1,0 +1,20 @@
+<?php
+
+define('BASE_PATH', realpath(__DIR__ . '/..')); 
+
+define('CORE_PATH', BASE_PATH . '/core');
+
+// // Specify the default controller
+define('LANDING_PAGE', 'welcome');
+
+// Add a key here for secure sessions
+define('SESS_KEY', '');
+
+define('CONTROLLER_PATH', BASE_PATH . '/controller');
+define('VIEW_PATH', BASE_PATH . '/view');
+define('LIB_PATH', BASE_PATH . '/lib');
+
+define('DB_NAME', '');
+define('DB_USER', '');
+define('DB_PASS', '');
+define('DB_HOST', '');
