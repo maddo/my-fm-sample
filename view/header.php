@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Member's Only</title>
 	<link rel="stylesheet" type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 	<style type="text/css">
       body {
         padding-top: 60px;

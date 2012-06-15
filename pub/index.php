@@ -4,7 +4,6 @@ session_start();
 
 require_once '../config/config.php';
 require_once CORE_PATH . '/MyAutoLoader.php';
-// require_once CORE_PATH . '../Core.php';
 
 $path = array();
 
