@@ -42,6 +42,7 @@ class User extends BaseController
 		$userRepo = new UserRepository();
 
 		$user = $userRepo->getUserByUsername($username);
+
 		if ( ! $user) {
 			$this->redirect('user', 'error');
 		}
@@ -80,6 +81,12 @@ class User extends BaseController
 		}
 
 		$username = $_POST['username'];
+
+		if ( ! $this->validUserName($username)) {
+			$this->setFlash('Please choose a username from 5 to 20 characters long! Choose from letters, numbers and underscores');
+			$this->redirect('user', 'register');
+		}
+
 		$password = $_POST['password'];
 		$p2 = $_POST['password_password'];
 		
@@ -97,7 +104,6 @@ class User extends BaseController
 
 		$userRepo = new UserRepository();
 
-		// var_dump($userRepo->addUser($user));die;
 		if ($userRepo->addUser($user) !== false) {
 			$this->setFlash('Registration successful! Please login!');
 			$this->redirect('user', 'login');
@@ -111,5 +117,16 @@ class User extends BaseController
 	public function errorAction()
 	{
 		$this->render('loginerrors');
+	}
+
+	protected function validUserName($username)
+	{
+		$pattern = '/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/';
+
+		if (preg_match($pattern, $username)) {
+			return true;
+		}
+
+		return false;
 	}
 }
