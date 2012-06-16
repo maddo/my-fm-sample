@@ -44,7 +44,8 @@ class User extends BaseController
 		$user = $userRepo->getUserByUsername($username);
 
 		if ( ! $user) {
-			$this->redirect('user', 'error');
+			$this->setFlash('Sorry, we were unable to locate you, please check your login info and try again.', 'error');
+			$this->redirect('user', 'login');
 		}
 
 		$dbPassword = $user->getPassword();
@@ -54,9 +55,11 @@ class User extends BaseController
 			$session = Session::getInstance();
 			$session->setUserData($user);
 
+			$this->setFlash('You are logged in!', 'success');
 			$this->redirect('members');
 		} else {
-			$this->redirect('user', 'error');
+			$this->setFlash('Password doesn\'t seem quite right', 'error');
+			$this->redirect('user', 'login');
 		}
 	}
 
@@ -76,14 +79,14 @@ class User extends BaseController
 			|| ! isset($_POST['password_password'])
 			|| ! isset($_POST['password_password'][0] )) {
 
-			$this->setFlash('Please try again, ensure all fields are completed');
+			$this->setFlash('Please try again, ensure all fields are completed', 'error');
 			$this->redirect('user', 'register');
 		}
 
 		$username = $_POST['username'];
 
 		if ( ! $this->validUserName($username)) {
-			$this->setFlash('Please choose a username from 5 to 20 characters long! Choose from letters, numbers and underscores');
+			$this->setFlash('Please choose a username from 5 to 20 characters long! Choose from letters, numbers and underscores', 'error');
 			$this->redirect('user', 'register');
 		}
 
@@ -94,7 +97,7 @@ class User extends BaseController
 			$hasher = new SaltyHashBrowns($password);
 			$hashedPassword = $hasher->getHash();
 		} else {
-			$this->setFlash('Sorry, the passwords did not match!');
+			$this->setFlash('Sorry, the passwords did not match!', 'error');
 			$this->redirect('user', 'register');
 		}
 
@@ -105,10 +108,10 @@ class User extends BaseController
 		$userRepo = new UserRepository();
 
 		if ($userRepo->addUser($user) !== false) {
-			$this->setFlash('Registration successful! Please login!');
+			$this->setFlash('Registration successful! Please login!', 'success');
 			$this->redirect('user', 'login');
 		} else {
-			$this->setFlash('Sorry! There was an error with your registration. Please try again');
+			$this->setFlash('Sorry! There was an error with your registration. Please try again', 'error');
 			$this->redirect('user', 'registration');
 		}
 

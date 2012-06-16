@@ -32,15 +32,29 @@
 		</div>
 	</div>
 	<div class="container">
-		<?php if (isset($data['flash']['bucket']) && count($data['flash']['bucket']) > 0): ?>
 		<div>
 			<ul class="unstyled">
-				<?php foreach ($data['flash']['bucket'] as $msg): ?>
+			<?php if (isset($data['flash']['error']) && count($data['flash']['error']) > 0): ?>
+				<?php foreach ($data['flash']['error'] as $msg): ?>
 				<li>
 					<span class="alert alert-error"><?php echo $msg; ?></span>
 				</li>
 				<?php endforeach; ?>
+			<?php endif; ?>
+			<?php if (isset($data['flash']['bucket']) && count($data['flash']['bucket']) > 0): ?>
+				<?php foreach ($data['flash']['bucket'] as $msg): ?>
+				<li>
+					<span class="alert"><?php echo $msg; ?></span>
+				</li>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			<?php if (isset($data['flash']['success']) && count($data['flash']['success']) > 0): ?>
+				<?php foreach ($data['flash']['success'] as $msg): ?>
+				<li>
+					<span class="alert alert-success"><?php echo $msg; ?></span>
+				</li>
+				<?php endforeach; ?>
+			<?php endif; ?>
 			</ul>
 		</div>
-		<?php endif; ?>
 		<div class="row">

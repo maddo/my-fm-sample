@@ -92,8 +92,10 @@ class Session
 
 	public function setFlash($msg, $key)
 	{
-		var_dump('ok?', $msg, $key);
 		$data = $this->getSessionData();
+		if ( ! isset($data['flash']['key'])) {
+			$data['flash']['key'] = array();
+		}
 		$data['flash'][$key][] = $msg;
 		$this->setSessionData($data);
 	}
