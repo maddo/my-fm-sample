@@ -124,7 +124,7 @@ class User extends BaseController
 
 	protected function validUserName($username)
 	{
-		$pattern = '/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/';
+		$pattern = '/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/';
 
 		if (preg_match($pattern, $username)) {
 			return true;
