@@ -21,6 +21,7 @@
 					<ul class="nav">
 						<?php if ($data['userData']['authorized']): ?>
 						<li class="greeting-nav">Welcome <?php echo $data['userData']['username']; ?></li>
+						<li><a href="/members">Members</a></li>
 						<li><a href="/user/deauthorize">Logout</a></li>
 						<?php else: ?>
 						<li><a href="/user/login">Login</a></li>
