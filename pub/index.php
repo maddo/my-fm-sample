@@ -12,8 +12,8 @@ if (isset($_GET["path"])) {
 	$path = explode('/', $fullPath);
 }
 
-$controller = isset($path[0]) ? $path[0] : LANDING_PAGE;
-$method = isset($path[1]) && isset($path[1][0]) ? $path[1] : 'index';
+$controller = !empty($path[0]) ? $path[0] : LANDING_PAGE;
+$method = !empty($path[1]) ? $path[1] : 'index';
 
 $className = ucfirst($controller);
 
