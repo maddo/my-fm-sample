@@ -1,0 +1,30 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@example.com
+    ServerName example.com
+    DocumentRoot /var/www/example.com/pub
+
+    <Directory /var/www/example.com/pub/>
+        Options FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        allow from all
+
+        RewriteEngine On
+        RewriteBase /
+
+        #Checks to see if the user is attempting to access a valid file,
+        #such as an image or css document, if this isn't true it sends the
+        #request to index.php
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^(.*)$ index.php?path=$1 [QSA]
+    </Directory>
+
+    ErrorLog /var/log/apache2/example-error_log
+
+    LogLevel warn
+
+    CustomLog /var/log/apache2/example-access_log combined
+
+</VirtualHost>
+
